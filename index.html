@@ -2,8 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Kegelstatistik · ASV Kiens</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes,viewport-fit=cover">
 <meta name="theme-color" content="#087f78">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,6 +12,7 @@
 <link rel="icon" href="./icon-192.png" sizes="192x192">
 <link rel="apple-touch-icon" href="./icon-192.png">
 
+<title>Kegelstatistik · ASV Kiens</title>
 <script>
 try{
   document.documentElement.dataset.theme = localStorage.getItem("kegelTheme") || "dark";
@@ -3886,22 +3886,1447 @@ html[data-theme="dark"] #mobilePlayerStats .mps-games{
 }
 
 
+/* ===== TEST V21: Spielergruppen größer, zentrierter, ruhiger ===== */
+@media(max-width:760px){
+
+  /* Kategorien klarer und wirklich mittig */
+  #mobilePlayerStats .mps-group-nav{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    gap:5px!important;
+    padding:6px!important;
+    margin-bottom:8px!important;
+  }
+  #mobilePlayerStats .mps-group-btn{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    text-align:center!important;
+    min-height:38px!important;
+    padding:5px 3px!important;
+    font-size:11.5px!important;
+    line-height:1!important;
+    font-weight:900!important;
+  }
+  #mobilePlayerStats .mps-group-btn.active{
+    font-size:12px!important;
+    box-shadow:inset 0 0 0 1px rgba(53,209,194,.22)!important;
+  }
+
+  /* Etwas mehr Platz für die eigentlichen Werte */
+  #mobilePlayerStats .mps-shell{
+    grid-template-columns:112px minmax(0,1fr)!important;
+  }
+
+  /* Linker Spielerbereich kompakt, aber lesbar */
+  #mobilePlayerStats .mps-name-head{
+    height:48px!important;
+    min-height:48px!important;
+    padding:0 5px!important;
+  }
+  #mobilePlayerStats .mps-name-head > span{
+    font-size:12px!important;
+  }
+  #mobilePlayerStats .mps-name-head > strong{
+    font-size:9px!important;
+  }
+
+  #mobilePlayerStats .mps-name-row,
+  #mobilePlayerStats .mps-value-row{
+    height:50px!important;
+    min-height:50px!important;
+  }
+
+  #mobilePlayerStats .mps-name-grid{
+    padding:0 24px 0 4px!important;
+    grid-template-columns:10px 8px minmax(0,1fr)!important;
+    column-gap:3px!important;
+  }
+  #mobilePlayerStats .mps-rank{
+    width:10px!important;
+    font-size:9.5px!important;
+  }
+  #mobilePlayerStats .mps-dot{
+    width:8px!important;
+    height:8px!important;
+  }
+  #mobilePlayerStats .mps-first{
+    font-size:10.4px!important;
+    line-height:1!important;
+  }
+  #mobilePlayerStats .mps-last{
+    font-size:12.7px!important;
+    line-height:1!important;
+  }
+  #mobilePlayerStats .mps-games{
+    right:4px!important;
+    min-width:16px!important;
+    font-size:9.5px!important;
+    padding:1px 3px!important;
+  }
+
+  /* Überschriften in den Statistikspalten größer und zentral */
+  #mobilePlayerStats .mps-head{
+    height:48px!important;
+    min-height:48px!important;
+  }
+  #mobilePlayerStats .mps-head .mps-cell{
+    font-size:11.5px!important;
+    line-height:1.05!important;
+    font-weight:950!important;
+    text-align:center!important;
+    justify-content:center!important;
+    align-items:center!important;
+    padding:0 4px!important;
+  }
+  #mobilePlayerStats .mps-head .mps-cell small{
+    font-size:8.8px!important;
+    line-height:1!important;
+    margin-top:2px!important;
+  }
+
+  /* Werte deutlich größer */
+  #mobilePlayerStats .mps-value-row .mps-cell{
+    font-size:15.5px!important;
+    line-height:1!important;
+    font-weight:950!important;
+    text-align:center!important;
+    justify-content:center!important;
+    align-items:center!important;
+    padding:0 3px!important;
+  }
+
+  /* dezente senkrechte Trennung der Kennzahlen */
+  #mobilePlayerStats .mps-head .mps-cell + .mps-cell,
+  #mobilePlayerStats .mps-value-row .mps-cell + .mps-cell{
+    border-left:1px solid rgba(127,145,170,.13)!important;
+  }
+
+  /* rechter Bereich optisch sauber mittig */
+  #mobilePlayerStats .mps-values,
+  #mobilePlayerStats .mps-head,
+  #mobilePlayerStats .mps-value-row{
+    width:100%!important;
+  }
+
+  /* Hinweis kleiner, damit Platz bei den Werten bleibt */
+  #mobilePlayerStats .mps-hint{
+    font-size:9px!important;
+    padding:6px 4px!important;
+  }
+}
+
+
+/* ===== TEST V22: vier Spalten garantiert ohne Seitwärtsschieben ===== */
+@media(max-width:760px){
+  #mobilePlayerStats,
+  #mobilePlayerStats .mps-shell,
+  #mobilePlayerStats .mps-values-wrap,
+  #mobilePlayerStats .mps-values,
+  #mobilePlayerStats .mps-head,
+  #mobilePlayerStats .mps-value-row{
+    max-width:100%!important;
+    box-sizing:border-box!important;
+  }
+
+  /* Entscheidend: alte horizontale Scroll-Regeln vollständig überstimmen */
+  #mobilePlayerStats .mps-values-wrap{
+    overflow-x:hidden!important;
+    overflow-y:hidden!important;
+    overscroll-behavior-x:none!important;
+    touch-action:pan-y!important;
+  }
+
+  #mobilePlayerStats .mps-values{
+    width:100%!important;
+    min-width:0!important;
+  }
+
+  /* Noch ein paar Pixel mehr für 3/4 Kennzahlenspalten */
+  #mobilePlayerStats .mps-shell{
+    grid-template-columns:108px minmax(0,1fr)!important;
+    overflow:hidden!important;
+  }
+
+  #mobilePlayerStats .mps-head,
+  #mobilePlayerStats .mps-value-row{
+    display:grid!important;
+    grid-template-columns:repeat(var(--mps-cols),minmax(0,1fr))!important;
+    width:100%!important;
+    min-width:0!important;
+    overflow:hidden!important;
+  }
+
+  #mobilePlayerStats .mps-cell,
+  #mobilePlayerStats .mps-cell.mid,
+  #mobilePlayerStats .mps-cell.wide{
+    width:100%!important;
+    min-width:0!important;
+    max-width:100%!important;
+    box-sizing:border-box!important;
+    overflow:hidden!important;
+  }
+
+  #mobilePlayerStats .mps-head .mps-cell{
+    padding:0 2px!important;
+    font-size:11px!important;
+    line-height:1.03!important;
+    text-align:center!important;
+    white-space:normal!important;
+    overflow-wrap:anywhere!important;
+  }
+
+  #mobilePlayerStats .mps-value-row .mps-cell{
+    padding:0 1px!important;
+    font-size:15px!important;
+    letter-spacing:-.15px!important;
+    white-space:nowrap!important;
+  }
+
+  /* Spielerbereich platzsparend */
+  #mobilePlayerStats .mps-name-grid{
+    padding-right:22px!important;
+  }
+  #mobilePlayerStats .mps-first{font-size:10px!important}
+  #mobilePlayerStats .mps-last{font-size:12.4px!important}
+  #mobilePlayerStats .mps-games{
+    right:3px!important;
+    min-width:15px!important;
+    padding:1px 2px!important;
+    font-size:9px!important;
+  }
+}
+
+
+/* ===== TEST V23: Pinch-Zoom wieder erlaubt, ohne horizontales Verschieben ===== */
+@media(max-width:760px){
+  /* vertikal scrollen + mit zwei Fingern zoomen; horizontales Verschieben bleibt aus */
+  #mobilePlayerStats,
+  #mobilePlayerStats *{
+    touch-action:pan-y pinch-zoom !important;
+  }
+
+  #mobilePlayerStats .mps-values-wrap{
+    overflow-x:hidden !important;
+    overscroll-behavior-x:none !important;
+  }
+}
+
+
+/* ===== TEST V24: Spielerstatistik groß, vollbreit, ohne Seitwärtsschieben ===== */
+@media(max-width:760px){
+  /* Browser-Pinch-Zoom wirklich freigeben. */
+  html, body, body *{
+    touch-action:auto !important;
+  }
+
+  #mobilePlayerStats{
+    width:100% !important;
+    max-width:100% !important;
+    overflow:visible !important;
+  }
+
+  /* Kategorien: ruhig, sauber zentriert */
+  #mobilePlayerStats .mps-group-nav{
+    grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+    gap:5px !important;
+    padding:5px !important;
+    margin:0 0 8px !important;
+  }
+  #mobilePlayerStats .mps-group-btn{
+    min-width:0 !important;
+    min-height:38px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    text-align:center !important;
+    padding:5px 2px !important;
+    font-size:11.5px !important;
+    line-height:1 !important;
+    white-space:nowrap !important;
+  }
+  #mobilePlayerStats .mps-group-btn.active{
+    font-size:12px !important;
+  }
+
+  /* Alte Split-Tabelle wird von V24 nicht mehr verwendet. */
+  #mobilePlayerStats .mps-shell{
+    display:none !important;
+  }
+
+  #mobilePlayerStats .mps2-table{
+    width:100%;
+    border:1px solid var(--line);
+    border-radius:12px;
+    overflow:hidden;
+    background:var(--surface);
+  }
+
+  /* Jeder Spieler ist eine kompakte Tabellen-Sektion, KEINE Karte. */
+  #mobilePlayerStats .mps2-player{
+    width:100%;
+    border-bottom:1px solid var(--line);
+    background:var(--surface);
+  }
+  #mobilePlayerStats .mps2-player:last-child{
+    border-bottom:0;
+  }
+
+  #mobilePlayerStats .mps2-playerhead{
+    min-height:28px;
+    display:grid;
+    grid-template-columns:18px 10px minmax(0,1fr) auto;
+    align-items:center;
+    gap:4px;
+    padding:3px 8px;
+    box-sizing:border-box;
+    background:var(--surface2);
+    cursor:pointer;
+  }
+  #mobilePlayerStats .mps2-rank{
+    font-size:10px;
+    font-weight:850;
+    color:var(--muted);
+  }
+  #mobilePlayerStats .mps2-dot{
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    display:block;
+  }
+  #mobilePlayerStats .mps2-name{
+    min-width:0;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    color:var(--ink);
+    font-size:13.5px;
+    line-height:1;
+  }
+  #mobilePlayerStats .mps2-first{
+    font-size:11px;
+    font-weight:800;
+    opacity:.88;
+  }
+  #mobilePlayerStats .mps2-name strong{
+    font-size:14px;
+    font-weight:950;
+  }
+  #mobilePlayerStats .mps2-games{
+    padding:2px 5px;
+    border-radius:7px;
+    background:rgba(127,145,170,.11);
+    color:var(--muted);
+    font-size:9.5px;
+    font-weight:900;
+    white-space:nowrap;
+  }
+
+  /* Die ausgewählte Kategorie bekommt die VOLLE Bildschirmbreite. */
+  #mobilePlayerStats .mps2-metrics{
+    width:100%;
+    min-width:0;
+    display:grid;
+    grid-template-columns:repeat(var(--mps-cols),minmax(0,1fr));
+    box-sizing:border-box;
+    overflow:hidden;
+  }
+  #mobilePlayerStats .mps2-metric{
+    min-width:0;
+    min-height:48px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:3px;
+    padding:4px 2px 5px;
+    box-sizing:border-box;
+    text-align:center;
+    overflow:hidden;
+  }
+  #mobilePlayerStats .mps2-metric + .mps2-metric{
+    border-left:1px solid rgba(127,145,170,.17);
+  }
+  #mobilePlayerStats .mps2-label{
+    width:100%;
+    min-width:0;
+    color:var(--muted);
+    font-size:9.5px;
+    line-height:1.03;
+    font-weight:850;
+    white-space:normal;
+  }
+  #mobilePlayerStats .mps2-label small{
+    font-size:8px;
+    line-height:1;
+  }
+  #mobilePlayerStats .mps2-value{
+    width:100%;
+    min-width:0;
+    color:var(--ink);
+    font-size:17px;
+    line-height:1;
+    font-weight:950;
+    letter-spacing:-.2px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:clip;
+  }
+
+  #mobilePlayerStats .mps-hint{
+    padding:7px 4px !important;
+    font-size:9px !important;
+    text-align:center !important;
+  }
+}
+
+html[data-theme="dark"] #mobilePlayerStats .mps2-table,
+html[data-theme="dark"] #mobilePlayerStats .mps2-player{
+  background:#0d1626;
+}
+html[data-theme="dark"] #mobilePlayerStats .mps2-playerhead{
+  background:#152033;
+}
+html[data-theme="dark"] #mobilePlayerStats .mps2-name,
+html[data-theme="dark"] #mobilePlayerStats .mps2-value{
+  color:#f3f6fb;
+}
+html[data-theme="dark"] #mobilePlayerStats .mps2-games{
+  background:#1f2d43;
+  color:#c9d3e1;
+}
+
+
+/* ===== TEST V25: Namen links, Überschriften nur einmal ===== */
+@media(max-width:760px){
+  html, body, body *{
+    touch-action:auto !important;
+  }
+
+  #mobilePlayerStats{
+    width:100% !important;
+    max-width:100% !important;
+    overflow:visible !important;
+  }
+
+  #mobilePlayerStats .mps-group-nav{
+    grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+    gap:5px !important;
+    padding:5px !important;
+    margin:0 0 8px !important;
+  }
+  #mobilePlayerStats .mps-group-btn{
+    min-width:0 !important;
+    min-height:38px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    text-align:center !important;
+    padding:5px 2px !important;
+    font-size:11.5px !important;
+    line-height:1 !important;
+    white-space:nowrap !important;
+  }
+  #mobilePlayerStats .mps-group-btn.active{
+    font-size:12px !important;
+  }
+
+  #mobilePlayerStats .mps-shell,
+  #mobilePlayerStats .mps2-table{
+    display:none !important;
+  }
+
+  #mobilePlayerStats .mps3-table{
+    width:100%;
+    border:1px solid var(--line);
+    border-radius:12px;
+    overflow:hidden;
+    background:var(--surface);
+  }
+
+  /* eine einzige Kopfzeile */
+  #mobilePlayerStats .mps3-head,
+  #mobilePlayerStats .mps3-row{
+    width:100%;
+    display:grid;
+    grid-template-columns:122px repeat(var(--mps-cols),minmax(0,1fr));
+    box-sizing:border-box;
+  }
+
+  #mobilePlayerStats .mps3-head{
+    min-height:48px;
+    background:var(--surface2);
+    border-bottom:1px solid var(--line);
+  }
+
+  #mobilePlayerStats .mps3-playerhead{
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    gap:4px;
+    padding:0 7px;
+    box-sizing:border-box;
+    font-size:11px;
+    font-weight:950;
+    color:var(--muted);
+    border-right:1px solid rgba(127,145,170,.22);
+  }
+  #mobilePlayerStats .mps3-playerhead small{
+    font-size:8px;
+    font-weight:850;
+    opacity:.8;
+  }
+
+  #mobilePlayerStats .mps3-headcell{
+    min-width:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:4px 2px;
+    box-sizing:border-box;
+    color:var(--muted);
+    font-size:10px;
+    line-height:1.03;
+    font-weight:900;
+    white-space:normal;
+    overflow-wrap:anywhere;
+  }
+  #mobilePlayerStats .mps3-headcell + .mps3-headcell{
+    border-left:1px solid rgba(127,145,170,.16);
+  }
+
+  /* pro Spieler nur noch eine Zeile */
+  #mobilePlayerStats .mps3-row{
+    min-height:55px;
+    border-bottom:1px solid var(--line);
+    cursor:pointer;
+  }
+  #mobilePlayerStats .mps3-row:last-child{
+    border-bottom:0;
+  }
+
+  #mobilePlayerStats .mps3-player{
+    min-width:0;
+    display:grid;
+    grid-template-columns:16px 9px minmax(0,1fr) 18px;
+    gap:3px;
+    align-items:center;
+    padding:4px 4px 4px 5px;
+    box-sizing:border-box;
+    border-right:1px solid rgba(127,145,170,.22);
+    background:var(--surface2);
+  }
+
+  #mobilePlayerStats .mps3-rank{
+    font-size:9.5px;
+    font-weight:850;
+    color:var(--muted);
+  }
+  #mobilePlayerStats .mps3-dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    display:block;
+  }
+  #mobilePlayerStats .mps3-name{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:center;
+    line-height:1.02;
+    overflow:hidden;
+  }
+  #mobilePlayerStats .mps3-first{
+    max-width:100%;
+    font-size:9.5px;
+    font-weight:800;
+    color:var(--muted);
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  #mobilePlayerStats .mps3-name strong{
+    max-width:100%;
+    font-size:12.3px;
+    font-weight:950;
+    color:var(--ink);
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  #mobilePlayerStats .mps3-games{
+    font-size:9px;
+    font-weight:900;
+    color:var(--muted);
+    text-align:center;
+  }
+
+  #mobilePlayerStats .mps3-val{
+    min-width:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0 1px;
+    box-sizing:border-box;
+    text-align:center;
+    color:var(--ink);
+    font-size:15.8px;
+    line-height:1;
+    font-weight:950;
+    letter-spacing:-.2px;
+    white-space:nowrap;
+    overflow:hidden;
+  }
+  #mobilePlayerStats .mps3-val + .mps3-val{
+    border-left:1px solid rgba(127,145,170,.13);
+  }
+
+  #mobilePlayerStats .mps-hint{
+    padding:7px 4px !important;
+    font-size:9px !important;
+    text-align:center !important;
+  }
+}
+
+html[data-theme="dark"] #mobilePlayerStats .mps3-table{
+  background:#0d1626;
+}
+html[data-theme="dark"] #mobilePlayerStats .mps3-head,
+html[data-theme="dark"] #mobilePlayerStats .mps3-player{
+  background:#152033;
+}
+html[data-theme="dark"] #mobilePlayerStats .mps3-name strong,
+html[data-theme="dark"] #mobilePlayerStats .mps3-val{
+  color:#f3f6fb;
+}
+
+
+/* ===== TEST V26: klarere Überschriften + Fokus auf Gesamtschnitt ===== */
+@media(max-width:760px){
+  #mobilePlayerStats .mps3-head{
+    min-height:58px !important;
+  }
+
+  #mobilePlayerStats .mps3-playerhead{
+    font-size:12.5px !important;
+    line-height:1.05 !important;
+    font-weight:950 !important;
+  }
+
+  /* Kürzere Begriffe erlauben endlich wirklich lesbare Kopfzeilen. */
+  #mobilePlayerStats .mps3-headcell{
+    font-size:13px !important;
+    line-height:1.06 !important;
+    font-weight:950 !important;
+    letter-spacing:-.15px !important;
+    padding:5px 2px !important;
+    overflow-wrap:normal !important;
+    word-break:normal !important;
+  }
+  #mobilePlayerStats .mps3-headcell small{
+    display:block !important;
+    margin-top:2px !important;
+    font-size:9.2px !important;
+    line-height:1 !important;
+    font-weight:850 !important;
+  }
+
+  #mobilePlayerStats .mps3-val{
+    font-size:16.4px !important;
+  }
+
+  /* Übersicht: Schnitt bekommt bewusst mehr Platz als Heim/Auswärts. */
+  #mobilePlayerStats .mps3-head.mps3-group-overview,
+  #mobilePlayerStats .mps3-row.mps3-group-overview{
+    grid-template-columns:116px 1.22fr 1fr 1fr !important;
+  }
+
+  #mobilePlayerStats .mps3-headcell.mps3-key-overall{
+    color:#42ded0 !important;
+    background:rgba(8,127,120,.20) !important;
+    box-shadow:inset 0 -3px 0 #16b8aa !important;
+    font-size:13.8px !important;
+  }
+  #mobilePlayerStats .mps3-val.mps3-key-overall{
+    color:#42ded0 !important;
+    background:rgba(8,127,120,.13) !important;
+    font-size:19.2px !important;
+    font-weight:1000 !important;
+    box-shadow:inset 0 0 0 1px rgba(22,184,170,.18) !important;
+  }
+
+  /* Alle übrigen Gruppen: etwas mehr Platz für die Beschriftungen. */
+  #mobilePlayerStats .mps3-head:not(.mps3-group-overview),
+  #mobilePlayerStats .mps3-row:not(.mps3-group-overview){
+    grid-template-columns:116px repeat(var(--mps-cols),minmax(0,1fr)) !important;
+  }
+
+  #mobilePlayerStats .mps3-name strong{font-size:12.5px !important;}
+}
+
+html:not([data-theme="dark"]) #mobilePlayerStats .mps3-headcell.mps3-key-overall{
+  color:#056d65 !important;
+  background:rgba(8,127,120,.12) !important;
+}
+html:not([data-theme="dark"]) #mobilePlayerStats .mps3-val.mps3-key-overall{
+  color:#056d65 !important;
+  background:rgba(8,127,120,.08) !important;
+}
+
+
+/* ===== TEST V27: lesbare, eindeutige mobile Überschriften ===== */
+@media(max-width:760px){
+  #mobilePlayerStats .mps3-head,
+  #mobilePlayerStats .mps3-row{
+    grid-template-columns:112px repeat(var(--mps-cols),minmax(0,1fr)) !important;
+  }
+
+  #mobilePlayerStats .mps3-head{
+    min-height:62px !important;
+  }
+
+  #mobilePlayerStats .mps3-playerhead{
+    padding:0 5px !important;
+    font-size:12.5px !important;
+    line-height:1.05 !important;
+  }
+
+  #mobilePlayerStats .mps3-headcell{
+    min-width:0 !important;
+    max-width:100% !important;
+    overflow:hidden !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    text-align:center !important;
+    padding:5px 2px !important;
+    box-sizing:border-box !important;
+    font-size:12.2px !important;
+    line-height:1.02 !important;
+    font-weight:950 !important;
+    letter-spacing:-.15px !important;
+    white-space:normal !important;
+    overflow-wrap:normal !important;
+    word-break:normal !important;
+  }
+
+  #mobilePlayerStats .mps3-headcell small{
+    display:block !important;
+    margin-top:3px !important;
+    max-width:100% !important;
+    font-size:9.2px !important;
+    line-height:1 !important;
+    font-weight:850 !important;
+    white-space:nowrap !important;
+  }
+
+  #mobilePlayerStats .mps3-val{
+    font-size:16.3px !important;
+  }
+
+  /* Gesamtschnitt bleibt die optisch wichtigste Kennzahl. */
+  #mobilePlayerStats .mps3-headcell.mps3-key-overall{
+    font-size:13.2px !important;
+    color:#39d6c8 !important;
+    background:rgba(8,127,120,.16) !important;
+    box-shadow:inset 0 -2px 0 #087f78 !important;
+  }
+  #mobilePlayerStats .mps3-val.mps3-key-overall{
+    font-size:18.6px !important;
+    color:#39d6c8 !important;
+    background:rgba(8,127,120,.10) !important;
+    font-weight:1000 !important;
+  }
+
+  #mobilePlayerStats .mps3-name strong{
+    font-size:12.2px !important;
+  }
+}
+html:not([data-theme="dark"]) #mobilePlayerStats .mps3-headcell.mps3-key-overall,
+html:not([data-theme="dark"]) #mobilePlayerStats .mps3-val.mps3-key-overall{
+  color:#066b64 !important;
+}
+
+
+/* ===== V28: Kasse A2 Ost + stabile mobile Überschriften ===== */
+@media(max-width:760px){
+  #mobilePlayerStats .mps3-headcell{
+    min-width:0!important;
+    padding:4px 2px!important;
+    line-height:1.04!important;
+    white-space:normal!important;
+    overflow:hidden!important;
+    text-overflow:clip!important;
+  }
+  #mobilePlayerStats .mps3-headcell small{
+    white-space:nowrap!important;
+  }
+  #mobilePlayerStats .mps3-key-kasseA2{
+    color:#f2b84b!important;
+    background:rgba(242,184,75,.07)!important;
+  }
+  #mobilePlayerStats .mps3-val.mps3-key-kasseA2{
+    font-size:15.6px!important;
+    font-weight:950!important;
+  }
+}
+
+
+/* ===== V29: eigene Kasse-Kachel + sauberes natives Zoomen/Pannen ===== */
+@media(max-width:760px){
+  /* Alte Touch-Regeln aus früheren Tests werden hier bewusst komplett überstimmt. */
+  html, body, body *{
+    touch-action:pan-x pan-y pinch-zoom !important;
+  }
+  html{
+    scroll-behavior:auto !important;
+    overscroll-behavior:auto !important;
+  }
+  body{
+    overscroll-behavior:auto !important;
+  }
+
+  /* 8 Kategorien = sauber 4 + 4. */
+  #mobilePlayerStats .mps-group-nav{
+    grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  }
+
+  /* Übersicht hat wieder nur drei Werte und dadurch mehr Platz. */
+  #mobilePlayerStats .mps3-head.mps3-group-overview,
+  #mobilePlayerStats .mps3-row.mps3-group-overview{
+    grid-template-columns:112px repeat(3,minmax(0,1fr)) !important;
+  }
+
+  /* Kasse ist eine eigene, ruhig lesbare Gruppe. */
+  #mobilePlayerStats .mps3-head.mps3-group-money,
+  #mobilePlayerStats .mps3-row.mps3-group-money{
+    grid-template-columns:112px repeat(4,minmax(0,1fr)) !important;
+  }
+  #mobilePlayerStats .mps-group-btn[data-mps-group="money"]{
+    color:#f2b84b !important;
+  }
+  #mobilePlayerStats .mps-group-btn[data-mps-group="money"].active{
+    background:rgba(242,184,75,.14) !important;
+    border-color:rgba(242,184,75,.34) !important;
+  }
+  #mobilePlayerStats .mps3-key-kasseA2{
+    color:#f2b84b !important;
+    background:rgba(242,184,75,.10) !important;
+    font-weight:1000 !important;
+  }
+  #mobilePlayerStats .mps3-val.mps3-key-kasseA2{
+    font-size:17px !important;
+  }
+  #mobilePlayerStats .mps3-key-kasseFwA2,
+  #mobilePlayerStats .mps3-key-kasseU500A2,
+  #mobilePlayerStats .mps3-key-kassePunktA2{
+    font-size:11.7px !important;
+  }
+
+  /* Horizontal scrollbare Diagrammflächen dürfen ebenfalls gezoomt werden. */
+  #charts .chart-wrap,
+  #dashboard #avgChart,
+  .table-wrap,
+  .db-wrap{
+    touch-action:pan-x pan-y pinch-zoom !important;
+    -webkit-overflow-scrolling:touch;
+  }
+}
+
+
+/* ===== V30: Kasse zuletzt + native Zoom/Pan-Bereinigung ===== */
+@media(max-width:760px){
+  /* Die Kasse verwendet exakt dieselbe Optik wie alle anderen Kategorien. */
+  #mobilePlayerStats .mps-group-btn[data-mps-group="money"]{
+    color:var(--muted) !important;
+    background:transparent !important;
+    border-color:transparent !important;
+  }
+  #mobilePlayerStats .mps-group-btn[data-mps-group="money"].active{
+    color:var(--brand) !important;
+    background:var(--brandSoft) !important;
+    border-color:transparent !important;
+    box-shadow:inset 0 0 0 1px rgba(53,209,194,.22) !important;
+  }
+  #mobilePlayerStats .mps3-key-kasseA2,
+  #mobilePlayerStats .mps3-key-kasseFwA2,
+  #mobilePlayerStats .mps3-key-kasseU500A2,
+  #mobilePlayerStats .mps3-key-kassePunktA2{
+    color:var(--ink) !important;
+    background:transparent !important;
+  }
+
+  /* Keine globale Gesture-Erzwingung mehr: Chrome darf Zoom und Viewport-Pan nativ steuern. */
+  html, body, .app, .main, .tabs-panel,
+  #mobilePlayerStats, #mobilePlayerStats *{
+    touch-action:auto !important;
+    overscroll-behavior:auto !important;
+  }
+  html,body{
+    overflow-x:auto !important;
+    scroll-behavior:auto !important;
+  }
+  body{
+    -webkit-overflow-scrolling:touch;
+  }
+
+  /* Nur echte horizontale Inhaltsbereiche behalten eigenes horizontales Scrollen. */
+  #charts .chart-wrap,
+  #dashboard #avgChart,
+  .table-wrap,
+  .db-wrap{
+    touch-action:auto !important;
+    overscroll-behavior:auto !important;
+    -webkit-overflow-scrolling:touch !important;
+  }
+}
+html[data-theme="dark"] #mobilePlayerStats .mps-group-btn[data-mps-group="money"]{
+  color:var(--muted) !important;
+  background:transparent !important;
+}
+html[data-theme="dark"] #mobilePlayerStats .mps-group-btn[data-mps-group="money"].active{
+  color:#5ee7d9 !important;
+  background:#182235 !important;
+  border-color:transparent !important;
+  box-shadow:none !important;
+}
+html[data-theme="dark"] #mobilePlayerStats .mps3-key-kasseA2,
+html[data-theme="dark"] #mobilePlayerStats .mps3-key-kasseFwA2,
+html[data-theme="dark"] #mobilePlayerStats .mps3-key-kasseU500A2,
+html[data-theme="dark"] #mobilePlayerStats .mps3-key-kassePunktA2{
+  color:#f3f6fb !important;
+  background:transparent !important;
+}
+
+
+
+/* ===== V31: Spieler-Spalte klarer, Sätze kompakter ===== */
+@media(max-width:760px){
+  #mobilePlayerStats .mps3-head,
+  #mobilePlayerStats .mps3-row{
+    grid-template-columns:126px repeat(var(--mps-cols),minmax(0,1fr)) !important;
+  }
+  #mobilePlayerStats .mps3-playerhead{
+    gap:6px !important;
+    padding:0 8px !important;
+    font-size:12.8px !important;
+    justify-content:flex-start !important;
+    white-space:nowrap !important;
+  }
+  #mobilePlayerStats .mps3-playerhead small{
+    font-size:9.8px !important;
+    font-weight:900 !important;
+    white-space:nowrap !important;
+  }
+  #mobilePlayerStats .mps3-player{
+    grid-template-columns:16px 9px minmax(0,1fr) 34px !important;
+    gap:4px !important;
+    padding:4px 6px !important;
+  }
+  #mobilePlayerStats .mps3-name strong{
+    font-size:12.6px !important;
+  }
+  #mobilePlayerStats .mps3-games{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    line-height:.95 !important;
+    text-align:center !important;
+    color:var(--ink) !important;
+    font-size:8.5px !important;
+    font-weight:900 !important;
+  }
+  #mobilePlayerStats .mps3-games strong{
+    display:block !important;
+    font-size:13px !important;
+    line-height:1 !important;
+    font-weight:1000 !important;
+    color:var(--ink) !important;
+  }
+  #mobilePlayerStats .mps3-games span{
+    display:block !important;
+    margin-top:1px !important;
+    font-size:7.7px !important;
+    line-height:1 !important;
+    opacity:.92 !important;
+  }
+  #mobilePlayerStats .mps3-head.mps3-group-sets,
+  #mobilePlayerStats .mps3-row.mps3-group-sets{
+    grid-template-columns:126px repeat(3,minmax(0,1fr)) !important;
+  }
+  #mobilePlayerStats .mps3-headcell{
+    font-size:12.4px !important;
+    padding:5px 3px !important;
+  }
+  #mobilePlayerStats .mps3-headcell small{
+    font-size:9.1px !important;
+  }
+}
+html[data-theme="dark"] #mobilePlayerStats .mps3-games,
+html[data-theme="dark"] #mobilePlayerStats .mps3-games strong,
+html[data-theme="dark"] #mobilePlayerStats .mps3-games span{
+  color:#f3f6fb !important;
+}
+
+
+
+/* ===== V32: Spielernamen + Spielanzahl sauber lesbar ===== */
+@media(max-width:760px){
+  /* Mehr Breite für Spieler; bei Sätze bleiben trotzdem drei gut lesbare Kennzahlen. */
+  #mobilePlayerStats .mps3-head,
+  #mobilePlayerStats .mps3-row{
+    grid-template-columns:150px repeat(var(--mps-cols),minmax(0,1fr)) !important;
+  }
+  #mobilePlayerStats .mps3-head.mps3-group-sets,
+  #mobilePlayerStats .mps3-row.mps3-group-sets{
+    grid-template-columns:150px repeat(3,minmax(0,1fr)) !important;
+  }
+
+  #mobilePlayerStats .mps3-player{
+    grid-template-columns:16px 9px minmax(0,1fr) 31px !important;
+    gap:4px !important;
+    padding:4px 6px !important;
+  }
+
+  /* Namen nicht mehr mit Ellipse abschneiden. */
+  #mobilePlayerStats .mps3-name{
+    overflow:visible !important;
+    min-width:0 !important;
+  }
+  #mobilePlayerStats .mps3-first,
+  #mobilePlayerStats .mps3-name strong{
+    max-width:none !important;
+    overflow:visible !important;
+    text-overflow:clip !important;
+    white-space:nowrap !important;
+  }
+  #mobilePlayerStats .mps3-first{
+    font-size:9.2px !important;
+  }
+  #mobilePlayerStats .mps3-name strong{
+    font-size:12.2px !important;
+    letter-spacing:-.15px !important;
+  }
+
+  /* Anzahl der Spiele: Zahl fett in Spielerfarbe, Beschriftung neutral. */
+  #mobilePlayerStats .mps3-games{
+    color:var(--muted) !important;
+    font-weight:850 !important;
+  }
+  #mobilePlayerStats .mps3-games strong{
+    color:var(--player-color) !important;
+    font-size:14px !important;
+    font-weight:1000 !important;
+  }
+  #mobilePlayerStats .mps3-games span{
+    color:var(--muted) !important;
+    font-size:7.8px !important;
+    font-weight:850 !important;
+  }
+
+  /* Kopf der ersten Spalte vollständig und ruhig. */
+  #mobilePlayerStats .mps3-playerhead{
+    padding:0 7px !important;
+    gap:7px !important;
+    font-size:12.8px !important;
+    white-space:nowrap !important;
+  }
+  #mobilePlayerStats .mps3-playerhead small{
+    font-size:9.5px !important;
+    white-space:nowrap !important;
+  }
+}
+
+
+
+/* ===== V33: Spielanzahl nur als farbige Zahl + klare Satzdaten-Meldung ===== */
+@media(max-width:760px){
+  #mobilePlayerStats .mps3-games{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    min-width:28px !important;
+  }
+  #mobilePlayerStats .mps3-games strong{
+    font-size:15px !important;
+    line-height:1 !important;
+    font-weight:1000 !important;
+  }
+  #mobilePlayerStats .mps3-games span{display:none !important;}
+  #mobilePlayerStats .mps3-nodata{
+    min-height:150px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    padding:22px 18px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:var(--surface2);
+    text-align:center;
+  }
+  #mobilePlayerStats .mps3-nodata strong{
+    font-size:15px;
+    font-weight:950;
+    color:var(--ink);
+  }
+  #mobilePlayerStats .mps3-nodata span{
+    max-width:420px;
+    font-size:11px;
+    line-height:1.4;
+    color:var(--muted);
+  }
+}
+html[data-theme="dark"] #mobilePlayerStats .mps3-nodata{
+  background:#152033;
+}
+html[data-theme="dark"] #mobilePlayerStats .mps3-nodata strong{
+  color:#f3f6fb;
+}
+
+
+
+/* ===== V34: Spielanzahl oben rechts + Kopf Sp./ges. sauber ===== */
+@media(max-width:760px){
+  #mobilePlayerStats .mps3-head,
+  #mobilePlayerStats .mps3-row{
+    grid-template-columns:156px repeat(var(--mps-cols),minmax(0,1fr)) !important;
+  }
+  #mobilePlayerStats .mps3-head.mps3-group-sets,
+  #mobilePlayerStats .mps3-row.mps3-group-sets{
+    grid-template-columns:156px repeat(3,minmax(0,1fr)) !important;
+  }
+  #mobilePlayerStats .mps3-playerhead{
+    display:flex !important;
+    align-items:flex-start !important;
+    justify-content:flex-start !important;
+    gap:8px !important;
+    padding:0 8px !important;
+  }
+  #mobilePlayerStats .mps3-playerhead > span{
+    flex:1 1 auto !important;
+    min-width:0 !important;
+  }
+  #mobilePlayerStats .mps3-playerhead small{
+    display:block !important;
+    margin-left:auto !important;
+    text-align:right !important;
+    line-height:.86 !important;
+    white-space:normal !important;
+  }
+  #mobilePlayerStats .mps3-player{
+    align-items:start !important;
+    grid-template-columns:16px 9px minmax(0,1fr) 32px !important;
+    padding:4px 6px 3px 6px !important;
+  }
+  #mobilePlayerStats .mps3-games{
+    display:flex !important;
+    align-self:stretch !important;
+    align-items:flex-end !important;
+    justify-content:flex-start !important;
+    padding-top:5px !important;
+    min-width:32px !important;
+    text-align:right !important;
+    color:var(--muted) !important;
+  }
+  #mobilePlayerStats .mps3-games strong{
+    color:var(--player-games-color,#f3f6fb) !important;
+    font-size:15px !important;
+    line-height:1 !important;
+    font-weight:1000 !important;
+  }
+}
+html[data-theme="dark"] #mobilePlayerStats .mps3-games strong{
+  color:var(--player-games-color,#f3f6fb) !important;
+}
+
+
+
+/* ===== V35: Feinschliff Spieler-Spalte ===== */
+@media(max-width:760px){
+  /* Etwas ausgewogenere Breite: Namen bleiben lesbar, Werte behalten genug Platz. */
+  #mobilePlayerStats .mps3-head,
+  #mobilePlayerStats .mps3-row{
+    grid-template-columns:154px repeat(var(--mps-cols),minmax(0,1fr)) !important;
+  }
+  #mobilePlayerStats .mps3-head.mps3-group-sets,
+  #mobilePlayerStats .mps3-row.mps3-group-sets{
+    grid-template-columns:154px repeat(3,minmax(0,1fr)) !important;
+  }
+
+  /* Kopf erste Spalte: Spieler links, Sp./ges. sauber rechts in 2 Zeilen. */
+  #mobilePlayerStats .mps3-playerhead{
+    position:relative !important;
+    display:block !important;
+    padding:0 42px 0 8px !important;
+    line-height:1 !important;
+  }
+  #mobilePlayerStats .mps3-playerhead > span{
+    display:flex !important;
+    align-items:center !important;
+    height:100% !important;
+    font-size:13px !important;
+    font-weight:950 !important;
+  }
+  #mobilePlayerStats .mps3-playerhead small{
+    position:absolute !important;
+    top:9px !important;
+    right:7px !important;
+    width:28px !important;
+    margin:0 !important;
+    text-align:right !important;
+    font-size:9.3px !important;
+    font-weight:900 !important;
+    line-height:1.02 !important;
+    white-space:normal !important;
+  }
+
+  /* Spielerzelle: Spielzahl absolut oben rechts, damit sie nie den Namen überdeckt. */
+  #mobilePlayerStats .mps3-player{
+    position:relative !important;
+    display:grid !important;
+    grid-template-columns:16px 9px minmax(0,1fr) !important;
+    align-items:center !important;
+    gap:4px !important;
+    min-height:58px !important;
+    padding:5px 31px 5px 6px !important;
+  }
+  #mobilePlayerStats .mps3-rank{
+    align-self:center !important;
+  }
+  #mobilePlayerStats .mps3-dot{
+    align-self:center !important;
+  }
+  #mobilePlayerStats .mps3-name{
+    justify-content:center !important;
+    line-height:1.02 !important;
+    overflow:visible !important;
+  }
+  #mobilePlayerStats .mps3-first{
+    font-size:9.6px !important;
+    line-height:1 !important;
+  }
+  #mobilePlayerStats .mps3-name strong{
+    font-size:12.6px !important;
+    line-height:1.02 !important;
+    letter-spacing:-.12px !important;
+  }
+  #mobilePlayerStats .mps3-games{
+    position:absolute !important;
+    top:6px !important;
+    right:7px !important;
+    display:block !important;
+    min-width:20px !important;
+    padding:0 !important;
+    text-align:right !important;
+    line-height:1 !important;
+  }
+  #mobilePlayerStats .mps3-games strong{
+    display:block !important;
+    color:var(--player-games-color,#f3f6fb) !important;
+    font-size:14.8px !important;
+    line-height:1 !important;
+    font-weight:1000 !important;
+    letter-spacing:-.15px !important;
+  }
+
+  /* Werte und Überschriften optisch einen Tick ruhiger ausrichten. */
+  #mobilePlayerStats .mps3-headcell{
+    padding:5px 2px !important;
+    line-height:1.04 !important;
+  }
+  #mobilePlayerStats .mps3-val{
+    min-height:58px !important;
+    font-variant-numeric:tabular-nums !important;
+  }
+}
+
+
+
+/* ===== V38: sichtbarer Feinschliff – Tabs + Satzkopf ===== */
+@media(max-width:760px){
+  /* Kategorien bleiben immer exakt in einem 4x2-Raster. Aktive Kategorie wächst nicht. */
+  #mobilePlayerStats .mps-group-nav{
+    display:grid !important;
+    grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+    grid-auto-rows:42px !important;
+    gap:5px !important;
+    padding:6px !important;
+    margin:0 0 8px !important;
+    overflow:hidden !important;
+  }
+  #mobilePlayerStats .mps-group-btn,
+  #mobilePlayerStats .mps-group-btn.active{
+    width:100% !important;
+    height:42px !important;
+    min-width:0 !important;
+    min-height:42px !important;
+    margin:0 !important;
+    padding:0 2px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    text-align:center !important;
+    font-size:11.5px !important;
+    line-height:1 !important;
+    font-weight:900 !important;
+    transform:none !important;
+  }
+
+  /* Gesamtbreite: links genug Platz für Namen, rechts bei Sätze drei saubere Spalten. */
+  #mobilePlayerStats .mps3-head,
+  #mobilePlayerStats .mps3-row{
+    grid-template-columns:150px repeat(var(--mps-cols),minmax(0,1fr)) !important;
+  }
+  #mobilePlayerStats .mps3-head.mps3-group-sets,
+  #mobilePlayerStats .mps3-row.mps3-group-sets{
+    grid-template-columns:150px repeat(3,minmax(0,1fr)) !important;
+  }
+
+  #mobilePlayerStats .mps3-head{
+    min-height:64px !important;
+  }
+  #mobilePlayerStats .mps3-playerhead{
+    position:relative !important;
+    display:block !important;
+    min-width:0 !important;
+    padding:0 42px 0 8px !important;
+    overflow:hidden !important;
+  }
+  #mobilePlayerStats .mps3-playerhead > span{
+    display:flex !important;
+    align-items:center !important;
+    height:100% !important;
+    font-size:12.8px !important;
+    line-height:1 !important;
+    font-weight:950 !important;
+    white-space:nowrap !important;
+  }
+  #mobilePlayerStats .mps3-playerhead small{
+    position:absolute !important;
+    top:10px !important;
+    right:8px !important;
+    width:30px !important;
+    text-align:right !important;
+    font-size:9.3px !important;
+    line-height:.95 !important;
+    font-weight:900 !important;
+    white-space:normal !important;
+  }
+
+  /* Satz-Überschriften bewusst kurz: keine abgeschnittenen langen Texte mehr. */
+  #mobilePlayerStats .mps3-group-sets .mps3-headcell{
+    padding:5px 3px !important;
+    font-size:12.4px !important;
+    line-height:1.02 !important;
+    overflow:hidden !important;
+    word-break:normal !important;
+    overflow-wrap:normal !important;
+  }
+  #mobilePlayerStats .mps3-group-sets .mps3-headcell small{
+    display:block !important;
+    margin-top:4px !important;
+    font-size:8.3px !important;
+    line-height:1 !important;
+    white-space:nowrap !important;
+  }
+  #mobilePlayerStats .mps3-group-sets .mps3-val{
+    font-size:16.7px !important;
+  }
+}
+
+
+
+/* ===== V41: maximale nutzbare Handybreite + saubere Best/Tiefst-Köpfe ===== */
+@media(max-width:760px){
+  /* Spielerbereich fast bis an den Displayrand ziehen. */
+  #players > .card.section{
+    width:calc(100% + 16px) !important;
+    margin-left:-8px !important;
+    margin-right:-8px !important;
+    padding:9px 6px 10px !important;
+    border-radius:16px !important;
+  }
+  #players > .card.section > .section-head{
+    padding-left:4px !important;
+    padding-right:4px !important;
+    margin-bottom:10px !important;
+  }
+  #players .table-tools,
+  #players .search{
+    width:100% !important;
+  }
+  #mobilePlayerStats{
+    width:100% !important;
+    max-width:none !important;
+  }
+
+  /* Kategorien nutzen die vorhandene Breite vollständig aus. */
+  #mobilePlayerStats .mps-group-nav{
+    width:100% !important;
+    gap:4px !important;
+    padding:5px !important;
+    margin-bottom:6px !important;
+  }
+  #mobilePlayerStats .mps-group-btn,
+  #mobilePlayerStats .mps-group-btn.active{
+    padding:0 1px !important;
+    font-size:11.6px !important;
+  }
+
+  /* Tabelle ebenfalls ohne unnötige Innenluft. */
+  #mobilePlayerStats .mps3-table{
+    width:100% !important;
+    max-width:none !important;
+  }
+
+  /* Links ausreichend Platz für vollständige Namen, Rest flexibel. */
+  #mobilePlayerStats .mps3-head,
+  #mobilePlayerStats .mps3-row{
+    grid-template-columns:148px repeat(var(--mps-cols),minmax(0,1fr)) !important;
+  }
+  #mobilePlayerStats .mps3-head.mps3-group-sets,
+  #mobilePlayerStats .mps3-row.mps3-group-sets{
+    grid-template-columns:148px repeat(3,minmax(0,1fr)) !important;
+  }
+
+  /* Leistung: Bestwert/Tiefstwert bewusst zweizeilig, nicht gequetscht. */
+  #mobilePlayerStats .mps3-group-performance .mps3-headcell{
+    line-height:1.02 !important;
+    white-space:normal !important;
+    overflow:visible !important;
+  }
+
+  /* Etwas mehr Nutzfläche in der ersten Spalte. */
+  #mobilePlayerStats .mps3-player{
+    padding-left:5px !important;
+    padding-right:29px !important;
+  }
+  #mobilePlayerStats .mps3-name strong{
+    font-size:12.7px !important;
+  }
+
+  /* Hinweis kompakter, damit mehr Statistik gleichzeitig sichtbar bleibt. */
+  #mobilePlayerStats .mps-hint{
+    padding:5px 3px !important;
+    font-size:8.4px !important;
+  }
+}
+
+
 /* ===== PWA ===== */
 .pwa-install-btn{display:none}
 @media(max-width:760px){
   .pwa-install-btn:not([hidden]){
-    display:inline-flex!important;
-    align-items:center;
-    justify-content:center;
-    min-height:34px;
-    padding:6px 9px;
-    font-size:10px;
-    white-space:nowrap;
+    display:inline-flex!important;align-items:center;justify-content:center;
+    min-height:34px;padding:6px 9px;font-size:10px;white-space:nowrap;
   }
 }
-@media(display-mode:standalone){
-  .pwa-install-btn{display:none!important}
-}
+@media(display-mode:standalone){.pwa-install-btn{display:none!important}}
 
 </style>
 </head>
@@ -3920,8 +5345,7 @@ html[data-theme="dark"] #mobilePlayerStats .mps-games{
       <button data-tab="games">Spiele</button>
       <button data-tab="database">Datenbank</button>
     </nav>
-    <div class="top-actions">
-<button id="installAppBtn" class="icon-btn pwa-install-btn" type="button" hidden>App installieren</button><button id="themeBtn" class="icon-btn" type="button">☀️ Hell</button><button id="csvBtn" class="icon-btn">CSV exportieren</button></div>
+    <div class="top-actions"><button id="installAppBtn" class="icon-btn pwa-install-btn" type="button" hidden>App installieren</button><button id="themeBtn" class="icon-btn" type="button">☀️ Hell</button><button id="csvBtn" class="icon-btn">CSV exportieren</button></div>
   </div>
 </header>
 
@@ -4087,9 +5511,34 @@ const sum=a=>a.filter(v=>n(v)!==null).reduce((s,v)=>s+v,0);
 const fmt=(v,d=1)=>v==null?"–":Number(v).toLocaleString("de-DE",{minimumFractionDigits:d,maximumFractionDigits:d});
 const int=v=>v==null?"–":Math.round(v).toLocaleString("de-DE");
 const pct=v=>v==null?"–":(100*v).toLocaleString("de-DE",{maximumFractionDigits:1})+" %";
+const pct0=v=>v==null?"–":Math.round(100*v).toLocaleString("de-DE")+" %";
+const euro=v=>v==null?"–":Number(v).toLocaleString("de-DE",{minimumFractionDigits:1,maximumFractionDigits:1})+" €";
+const euro0=v=>v==null?"–":Number(v).toLocaleString("de-DE",{minimumFractionDigits:0,maximumFractionDigits:0})+" €";
+const isA2=r=>r?.Wettbewerb==="A2 Ost";
+const fwMoneyForGame=r=>{
+  const fw=n(r["Spieler Fehlwürfe"])??0;
+  return Math.min(fw,4)*0.5 + Math.max(fw-4,0);
+};
+const under500MoneyForGame=r=>{
+  if(n(r["Spieler Gesamt"])===null || n(r["Spieler Gesamt"])>=500)return 0;
+  const startYear=parseInt(String(r.Saison||"").slice(0,4),10);
+  return Number.isFinite(startYear) && startYear>=2026 ? 10 : 5;
+};
+const lostPointMoneyForGame=r=>Number(r.Mannschaftspunkt)===0?5:0;
+const kasseForGame=r=>fwMoneyForGame(r)+under500MoneyForGame(r)+lostPointMoneyForGame(r);
 const deDate=s=>{if(!s)return"";return new Date(s+"T00:00:00").toLocaleDateString("de-DE",{day:"2-digit",month:"2-digit",year:"numeric"})};
 const uniq=a=>[...new Set(a.filter(v=>v!==null&&v!==undefined&&v!==""))];
 const colorFor=name=>COLORS[name]||"#64748b";
+function readablePlayerTextColor(hex){
+  const h=(hex||"#64748b").replace('#','');
+  const full=h.length===3 ? h.split('').map(ch=>ch+ch).join('') : h;
+  if(full.length!==6)return '#f3f6fb';
+  const r=parseInt(full.slice(0,2),16), g=parseInt(full.slice(2,4),16), b=parseInt(full.slice(4,6),16);
+  const lin=c=>{c=c/255; return c<=0.03928 ? c/12.92 : Math.pow((c+0.055)/1.055,2.4);};
+  const L=0.2126*lin(r)+0.7152*lin(g)+0.0722*lin(b);
+  return L<0.18 ? '#f3f6fb' : (hex||'#64748b');
+}
+
 
 function setupSelect(id,vals,allLabel,preferred){
   const el=$(id);el.innerHTML="";
@@ -4192,7 +5641,11 @@ function playerStats(rows){
       mapRows.filter(v=>v<0.5).length
     ];
     const last4=a.slice(-4).map(r=>r["Spieler Gesamt"]),overall=avg(a.map(r=>r["Spieler Gesamt"]));
-    out.push({name,games:a.length,overall,missAvg:avg(a.map(r=>r["Spieler Fehlwürfe"])),volle:avg(a.map(r=>r["Spieler Volle"])),abraeumer:avg(a.map(r=>r["Spieler Abräumer"])),duels:duels.join("-"),map:avg(a.map(r=>r.Mannschaftspunkt)),home:avg(home.map(r=>r["Spieler Gesamt"])),away:avg(away.map(r=>r["Spieler Gesamt"])),opp:avg(a.map(r=>r["Gegner Kegel Spieler"])),delta:(avg(home.map(r=>r["Spieler Gesamt"]))??0)-(avg(away.map(r=>r["Spieler Gesamt"]))??0),trend:last4.length?avg(last4)-overall:null,missTotal:sum(a.map(r=>r["Spieler Fehlwürfe"])),missLe3:a.filter(r=>n(r["Spieler Fehlwürfe"])<=3).length,missGt8:a.filter(r=>n(r["Spieler Fehlwürfe"])>8).length,zeroMiss:a.filter(r=>n(r["Spieler Fehlwürfe"])===0).length,best:Math.max(...a.map(r=>r["Spieler Gesamt"])),worst:Math.min(...a.map(r=>r["Spieler Gesamt"])),abr200:a.filter(r=>n(r["Spieler Abräumer"])>=200).length,abr150:a.filter(r=>n(r["Spieler Abräumer"])<150).length,teamBest:a.filter(r=>r["Tagesbester Mannschaft"]===name).length,overallBest:a.filter(r=>r["Tagesbester gesamt"]===name).length,lt520:a.filter(r=>n(r["Spieler Gesamt"])<520).length,gt580:a.filter(r=>n(r["Spieler Gesamt"])>580).length,gt590:a.filter(r=>n(r["Spieler Gesamt"])>590).length,gt600:a.filter(r=>n(r["Spieler Gesamt"])>600).length,setLt:sets.filter(s=>s.total<120).length,setGt:sets.filter(s=>s.total>150).length,setTotal:sets.length,volle90:sets.filter(s=>s.volle>=90).length})
+    out.push({name,games:a.length,overall,missAvg:avg(a.map(r=>r["Spieler Fehlwürfe"])),volle:avg(a.map(r=>r["Spieler Volle"])),abraeumer:avg(a.map(r=>r["Spieler Abräumer"])),duels:duels.join("-"),map:avg(a.map(r=>r.Mannschaftspunkt)),home:avg(home.map(r=>r["Spieler Gesamt"])),away:avg(away.map(r=>r["Spieler Gesamt"])),opp:avg(a.map(r=>r["Gegner Kegel Spieler"])),delta:(avg(home.map(r=>r["Spieler Gesamt"]))??0)-(avg(away.map(r=>r["Spieler Gesamt"]))??0),trend:last4.length?avg(last4)-overall:null,missTotal:sum(a.map(r=>r["Spieler Fehlwürfe"])),missLe3:a.filter(r=>n(r["Spieler Fehlwürfe"])<=3).length,missGt8:a.filter(r=>n(r["Spieler Fehlwürfe"])>8).length,zeroMiss:a.filter(r=>n(r["Spieler Fehlwürfe"])===0).length,best:Math.max(...a.map(r=>r["Spieler Gesamt"])),worst:Math.min(...a.map(r=>r["Spieler Gesamt"])),abr200:a.filter(r=>n(r["Spieler Abräumer"])>=200).length,abr150:a.filter(r=>n(r["Spieler Abräumer"])<150).length,teamBest:a.filter(r=>r["Tagesbester Mannschaft"]===name).length,overallBest:a.filter(r=>r["Tagesbester gesamt"]===name).length,
+      kasseA2:sum(a.filter(isA2).map(kasseForGame)),
+      kasseFwA2:sum(a.filter(isA2).map(fwMoneyForGame)),
+      kasseU500A2:sum(a.filter(isA2).map(under500MoneyForGame)),
+      kassePunktA2:sum(a.filter(isA2).map(lostPointMoneyForGame)),lt520:a.filter(r=>n(r["Spieler Gesamt"])<520).length,gt580:a.filter(r=>n(r["Spieler Gesamt"])>580).length,gt590:a.filter(r=>n(r["Spieler Gesamt"])>590).length,gt600:a.filter(r=>n(r["Spieler Gesamt"])>600).length,setLt:sets.filter(s=>s.total<120).length,setGt:sets.filter(s=>s.total>150).length,setTotal:sets.length,volle90:sets.filter(s=>s.volle>=90).length})
   }
   return out.sort((a,b)=>b.overall-a.overall);
 }
@@ -4349,15 +5802,15 @@ function mobileHeader(label,key){
     name:"Spieler",games:"Sp.",overall:"Ø",missAvg:"Ø FW",volle:"Volle",abraeumer:"Abr.",
     duels:"S-U-N",map:"MaP%",home:"H Ø",away:"A Ø",opp:"Geg. Ø",delta:"Δ H/A",
     trend:"Trend",missTotal:"FW ges.",missLe3:"≤3",missGt8:">8",zeroMiss:"0 FW",
-    best:"Best",worst:"Min",abr200:"Abr≥200",abr150:"Abr<150",teamBest:"TB Team",
-    overallBest:"TB ges.",lt520:"<520",gt580:">580",gt590:">590",gt600:">600",
+    best:"Bestwert",worst:"Tiefstwert",abr200:"Abr≥200",abr150:"Abr<150",teamBest:"Tagesb. Team",
+    overallBest:"Tagesb. ges.",kasseA2:"Kasse €",kasseFwA2:"FW",kasseU500A2:"<500",kassePunktA2:"Punkt",lt520:"<520",gt580:">580",gt590:">590",gt600:">600",
     setLt:"S<120",setTotal:"Sätze",volle90:"V≥90"
   };
   return short[key]||label;
 }
 
 const P_COLS=[
- ["Spieler","name",p=>p.name],["Spiele","games",p=>p.games],["Gesamtschnitt","overall",p=>fmt(p.overall)],["Ø Fehlw.","missAvg",p=>fmt(p.missAvg)],["Volle","volle",p=>fmt(p.volle)],["Abräumer","abraeumer",p=>fmt(p.abraeumer)],["S-U-N","duels",p=>p.duels],["MaP %","map",p=>pct(p.map)],["Heim","home",p=>fmt(p.home)],["Auswärts Ø","away",p=>fmt(p.away)],["Gegner Ø","opp",p=>fmt(p.opp)],["Δ H/A","delta",p=>`<span class="${p.delta>=0?'good-t':'bad-t'}">${p.delta>=0?'+':''}${fmt(p.delta)}</span>`],["Trend<br><small>4 Spiele</small>","trend",p=>p.trend==null?"–":`<span class="${p.trend>=0?'good-t':'bad-t'}">${p.trend>=0?'+':''}${fmt(p.trend)}</span>`],["<small>Fehlwürfe</small><span class=\"fw-main\">gesamt</span>","missTotal",p=>p.missTotal],["<small>Spiele</small><span class=\"fw-main\">≤3 FW</span>","missLe3",p=>p.missLe3],["<small>Spiele</small><span class=\"fw-main\">&gt;8 FW</span>","missGt8",p=>p.missGt8],["<small>Spiele</small><span class=\"fw-main\">0 FW</span>","zeroMiss",p=>p.zeroMiss],["Best","best",p=>p.best],["Min","worst",p=>p.worst],["Abr.<br><small>≥200</small>","abr200",p=>p.abr200],["Abr.<br><small>&lt;150</small>","abr150",p=>p.abr150],["Tagesb. Team","teamBest",p=>p.teamBest],["Tagesb. ges.","overallBest",p=>p.overallBest],["<520","lt520",p=>p.lt520],[">580","gt580",p=>p.gt580],[">590","gt590",p=>p.gt590],[">600","gt600",p=>p.gt600],["Sätze <120 %","setLt",p=>p.setTotal?pct(p.setLt/p.setTotal):"–"],["Sätze ges./<120/>150","setTotal",p=>`${p.setTotal} / ${p.setLt} / ${p.setGt}`],["Volle ≥90 %","volle90",p=>p.setTotal?pct(p.volle90/p.setTotal):"–"],["≥90 / Spiel","volle90",p=>p.games?fmt(p.volle90/p.games):"–"]
+ ["Spieler","name",p=>p.name],["Spiele","games",p=>p.games],["Gesamtschnitt","overall",p=>fmt(p.overall)],["Ø Fehlw.","missAvg",p=>fmt(p.missAvg)],["Volle","volle",p=>fmt(p.volle)],["Abräumer","abraeumer",p=>fmt(p.abraeumer)],["S-U-N","duels",p=>p.duels],["MaP %","map",p=>pct(p.map)],["Heim","home",p=>fmt(p.home)],["Auswärts Ø","away",p=>fmt(p.away)],["Gegner Ø","opp",p=>fmt(p.opp)],["Trend<br><small>4 Spiele</small>","trend",p=>p.trend==null?"–":`<span class="${p.trend>=0?'good-t':'bad-t'}">${p.trend>=0?'+':''}${fmt(p.trend)}</span>`],["<small>Fehlwürfe</small><span class=\"fw-main\">gesamt</span>","missTotal",p=>p.missTotal],["<small>Spiele</small><span class=\"fw-main\">≤3 FW</span>","missLe3",p=>p.missLe3],["<small>Spiele</small><span class=\"fw-main\">&gt;8 FW</span>","missGt8",p=>p.missGt8],["<small>Spiele</small><span class=\"fw-main\">0 FW</span>","zeroMiss",p=>p.zeroMiss],["Best-<br>wert","best",p=>p.best],["Tiefst-<br>wert","worst",p=>p.worst],["Abr.<br><small>≥200</small>","abr200",p=>p.abr200],["Abr.<br><small>&lt;150</small>","abr150",p=>p.abr150],["Tagesb.<br><small>Team</small>","teamBest",p=>p.teamBest],["Tagesb.<br><small>gesamt</small>","overallBest",p=>p.overallBest],["Gesamt","kasseA2",p=>euro(p.kasseA2)],["<520","lt520",p=>p.lt520],[">580","gt580",p=>p.gt580],[">590","gt590",p=>p.gt590],[">600","gt600",p=>p.gt600],["Sätze <120 %","setLt",p=>p.setTotal?pct(p.setLt/p.setTotal):"–"],["Sätze ges./<120/>150","setTotal",p=>`${p.setTotal} / ${p.setLt} / ${p.setGt}`],["Volle ≥90 %","volle90",p=>p.setTotal?pct(p.volle90/p.setTotal):"–"],["≥90 / Spiel","volle90",p=>p.games?fmt(p.volle90/p.games):"–"]
 ];
 
 function splitPlayerName(name){
@@ -4373,33 +5826,32 @@ const MOBILE_PLAYER_GROUPS={
   overview:{
     label:"Übersicht",
     metrics:[
-      ["Ø","overall",p=>fmt(p.overall)],
-      ["Heim","home",p=>fmt(p.home)],
-      ["Auswärts","away",p=>fmt(p.away)],
-      ["Δ H/A","delta",p=>p.delta==null?"–":`${p.delta>=0?"+":""}${fmt(p.delta)}`]
+      ["Gesamt<br><small>Ø</small>","overall",p=>int(p.overall)],
+      ["Heim<br><small>Ø</small>","home",p=>int(p.home)],
+      ["Auswärts<br><small>Ø</small>","away",p=>int(p.away)]
     ]
   },
   performance:{
     label:"Leistung",
     metrics:[
-      ["Volle","volle",p=>fmt(p.volle)],
-      ["Abr.","abraeumer",p=>fmt(p.abraeumer)],
-      ["Top","best",p=>p.best],
-      ["Flop","worst",p=>p.worst]
+      ["Volle<br><small>Ø</small>","volle",p=>int(p.volle)],
+      ["Abr.<br><small>Ø</small>","abraeumer",p=>int(p.abraeumer)],
+      ["Best-<br>wert","best",p=>p.best],
+      ["Tiefst-<br>wert","worst",p=>p.worst]
     ]
   },
   duels:{
     label:"Duelle",
     metrics:[
-      ["MaP %","map",p=>pct(p.map)],
-      ["S-U-N","duels",p=>p.duels],
-      ["Geg. Ø","opp",p=>fmt(p.opp)]
+      ["MaP<br><small>%</small>","map",p=>pct0(p.map)],
+      ["S–U–N","duels",p=>p.duels],
+      ["Gegner<br><small>Ø</small>","opp",p=>int(p.opp)]
     ]
   },
   misses:{
-    label:"Fehlwurf",
+    label:"Fehlwürfe",
     metrics:[
-      ["Ø FW","missAvg",p=>fmt(p.missAvg)],
+      ["FW<br><small>Ø</small>","missAvg",p=>fmt(p.missAvg)],
       ["FW<br><small>gesamt</small>","missTotal",p=>p.missTotal],
       ["≤3 FW<br><small>Spiele</small>","missLe3",p=>p.missLe3],
       [">8 FW<br><small>Spiele</small>","missGt8",p=>p.missGt8]
@@ -4410,25 +5862,34 @@ const MOBILE_PLAYER_GROUPS={
     metrics:[
       ["0 FW","zeroMiss",p=>p.zeroMiss],
       ["Abr.<br><small>≥200</small>","abr200",p=>p.abr200],
-      ["TB<br><small>Team / ges.</small>","teamBest",p=>`${p.teamBest} / ${p.overallBest}`]
+      ["Tagesb.<br><small>Team</small>","teamBest",p=>p.teamBest],
+      ["Tagesb.<br><small>gesamt</small>","overallBest",p=>p.overallBest]
     ]
   },
   form:{
     label:"Form",
     metrics:[
-      ["Trend<br><small>4 Spiele</small>","trend",p=>p.trend==null?"–":`${p.trend>=0?"+":""}${fmt(p.trend)}`],
+      ["Trend<br><small>4 Sp.</small>","trend",p=>p.trend==null?"–":`${p.trend>=0?"+":""}${int(p.trend)}`],
       ["Abr.<br><small>&lt;150</small>","abr150",p=>p.abr150],
       ["<520","lt520",p=>p.lt520],
-      [">580<br><small>/590/600</small>","gt580",p=>`${p.gt580}/${p.gt590}/${p.gt600}`]
+      ["580+<br><small>590+ / 600+</small>","gt580",p=>`${p.gt580}/${p.gt590}/${p.gt600}`]
     ]
   },
   sets:{
     label:"Sätze",
     metrics:[
-      ["Gesamt<br><small>&lt;120 / &gt;150</small>","setTotal",p=>`${p.setTotal}/${p.setLt}/${p.setGt}`],
-      ["&lt;120<br><small>Sätze</small>","setLt",p=>p.setTotal?pct(p.setLt/p.setTotal):"–"],
-      ["≥90<br><small>Volle</small>","volle90",p=>p.setTotal?pct(p.volle90/p.setTotal):"–"],
-      ["≥90/Sp.<br><small>Volle</small>","volle90game",p=>p.games?fmt(p.volle90/p.games):"–"]
+      ["Gesamt<br><small>&lt;120 / &gt;150</small>","setTotal",p=>p.setTotal?`${p.setTotal}/${p.setLt}/${p.setGt}`:"–"],
+      ["&lt;120<br><small>Sätze</small>","setLt",p=>p.setTotal?pct0(p.setLt/p.setTotal):"–"],
+      ["Volle<br><small>≥90</small>","volle90",p=>p.setTotal?pct0(p.volle90/p.setTotal):"–"]
+    ]
+  },
+  money:{
+    label:"Kasse €",
+    metrics:[
+      ["Gesamt","kasseA2",p=>euro(p.kasseA2)],
+      ["FW","kasseFwA2",p=>euro0(p.kasseFwA2)],
+      ["&lt;500","kasseU500A2",p=>euro0(p.kasseU500A2)],
+      ["Punkt<br><small>verloren</small>","kassePunktA2",p=>euro0(p.kassePunktA2)]
     ]
   }
 }
@@ -4457,73 +5918,57 @@ function renderMobilePlayerStats(rows){
 
   const group=MOBILE_PLAYER_GROUPS[mobilePlayerGroup]||MOBILE_PLAYER_GROUPS.overview;
   const metrics=group.metrics;
-
-  const names=ps.map((p,i)=>{
-    const sp=splitPlayerName(p.name);
-    return `<div class="mps-name-row" data-player="${p.name.replaceAll('"','&quot;')}">
-      <div class="mps-fixed-row">
-        <div class="mps-name-grid">
-          <span class="mps-rank">${i+1}.</span>
-          <span class="mps-dot" style="background:${colorFor(p.name)}"></span>
-          <span class="mps-first">${sp.first}</span>
-          <span class="mps-last">${sp.last}</span>
-        </div>
-        <div class="mps-games">${p.games}</div>
-      </div>
-    </div>`;
-  }).join("");
-
-  const head=metrics.map(m=>`<div class="mps-cell">${m[0]}</div>`).join("");
-  const values=ps.map(p=>`<div class="mps-value-row">${metrics.map(m=>`<div class="mps-cell">${m[2](p)}</div>`).join("")}</div>`).join("");
+  const noSetData=mobilePlayerGroup==="sets" && ps.length>0 && ps.every(p=>!p.setTotal);
 
   const tabs=Object.entries(MOBILE_PLAYER_GROUPS).map(([key,g])=>
     `<button type="button" class="mps-group-btn ${key===mobilePlayerGroup?"active":""}" data-mps-group="${key}">${g.label}</button>`
   ).join("");
 
+  const headMetrics=metrics.map(m=>`
+    <div class="mps3-headcell mps3-key-${m[1]}">${m[0]}</div>`).join("");
+
+  const rowsHtml=ps.map((p,i)=>{
+    const sp=splitPlayerName(p.name);
+    const vals=metrics.map(m=>`
+      <div class="mps3-val mps3-key-${m[1]}">${m[2](p)}</div>`).join("");
+
+    return `<div class="mps3-row mps3-group-${mobilePlayerGroup}" style="--mps-cols:${metrics.length}" data-player="${p.name.replaceAll('"','&quot;')}">
+      <div class="mps3-player" style="--player-color:${colorFor(p.name)};--player-games-color:${readablePlayerTextColor(colorFor(p.name))}">
+        <span class="mps3-rank">${i+1}.</span>
+        <span class="mps3-dot" style="background:${colorFor(p.name)}"></span>
+        <span class="mps3-name">
+          <span class="mps3-first">${sp.first}</span>
+          <strong>${sp.last}</strong>
+        </span>
+        <span class="mps3-games"><strong>${p.games}</strong></span>
+      </div>
+      ${vals}
+    </div>`;
+  }).join("");
+
   host.innerHTML=`
     <div class="mps-group-nav">${tabs}</div>
-    <div class="mps-shell">
-      <div class="mps-names">
-        <div class="mps-name-head"><span>Spieler</span><strong>Sp.</strong></div>
-        ${names}
-      </div>
-      <div class="mps-values-wrap">
-        <div class="mps-values" style="--mps-cols:${metrics.length}">
-          <div class="mps-head">${head}</div>
-          ${values}
+    ${noSetData ? `
+      <div class="mps3-nodata">
+        <strong>Keine Satzdaten für diese Auswahl</strong>
+        <span>Für 2024/25 sind keine einzelnen Satzwerte gespeichert. Satzstatistiken sind ab 2025/26 verfügbar.</span>
+      </div>` : `
+      <div class="mps3-table">
+        <div class="mps3-head mps3-group-${mobilePlayerGroup}" style="--mps-cols:${metrics.length}">
+          <div class="mps3-playerhead"><span>Spieler</span><small>Sp.<br>ges.</small></div>
+          ${headMetrics}
         </div>
-      </div>
-    </div>
-    <div class="mps-hint">Alle Werte enthalten · Gruppe antippen oder ↔ wischen · Spieler = Details</div>`;
+        ${rowsHtml}
+      </div>`}
+    <div class="mps-hint">Kategorie antippen · Spieler antippen = Details · Zwei-Finger-Zoom möglich</div>`;
 
-  host.querySelectorAll(".mps-name-row[data-player]").forEach(el=>{
+  host.querySelectorAll(".mps3-row[data-player]").forEach(el=>{
     el.addEventListener("click",()=>openPlayerProfile(el.dataset.player));
   });
 
   host.querySelectorAll("[data-mps-group]").forEach(btn=>{
     btn.addEventListener("click",()=>switchMobilePlayerGroup(btn.dataset.mpsGroup));
   });
-
-  // Horizontaler Wisch wechselt die ganze Kennzahlengruppe.
-  const swipeArea=host.querySelector(".mps-values-wrap");
-  if(swipeArea){
-    let sx=0,sy=0;
-    swipeArea.addEventListener("touchstart",e=>{
-      const t=e.changedTouches[0];
-      sx=t.clientX; sy=t.clientY;
-    },{passive:true});
-    swipeArea.addEventListener("touchend",e=>{
-      const t=e.changedTouches[0];
-      const dx=t.clientX-sx, dy=t.clientY-sy;
-      if(Math.abs(dx)<48 || Math.abs(dx)<Math.abs(dy)*1.35)return;
-
-      const keys=Object.keys(MOBILE_PLAYER_GROUPS);
-      let i=keys.indexOf(mobilePlayerGroup);
-      if(dx<0 && i<keys.length-1)i++;
-      if(dx>0 && i>0)i--;
-      if(keys[i]!==mobilePlayerGroup)switchMobilePlayerGroup(keys[i]);
-    },{passive:true});
-  }
 }
 
 function renderPlayerTable(rows){
@@ -4937,7 +6382,7 @@ function openPlayerProfile(name){
     <div class="profile-kpis">
       <div class="profile-kpi"><div class="l">Gesamtschnitt</div><div class="v">${fmt(p.overall)}</div></div>
       <div class="profile-kpi"><div class="l">Spiele</div><div class="v">${p.games}</div></div>
-      <div class="profile-kpi"><div class="l">Bestleistung</div><div class="v">${int(p.best)}</div></div>
+      <div class="profile-kpi"><div class="l">Top</div><div class="v">${int(p.best)}</div></div>
       <div class="profile-kpi"><div class="l">Ø Fehlwürfe</div><div class="v">${fmt(p.missAvg)}</div></div>
     </div>
 
@@ -4967,8 +6412,12 @@ function openPlayerProfile(name){
           <div class="detail-row"><span>Fehlwürfe >8</span><strong>${p.missGt8}</strong></div>
           <div class="detail-row"><span>Abräumer ≥200</span><strong>${p.abr200}</strong></div>
           <div class="detail-row"><span>Abräumer <150</span><strong>${p.abr150}</strong></div>
-          <div class="detail-row"><span>Tagesbester Mannschaft</span><strong>${p.teamBest}</strong></div>
+          <div class="detail-row"><span>Tagesbester Team</span><strong>${p.teamBest}</strong></div>
           <div class="detail-row"><span>Tagesbester gesamt</span><strong>${p.overallBest}</strong></div>
+          <div class="detail-row"><span>Kasse gesamt</span><strong>${euro(p.kasseA2)}</strong></div>
+          <div class="detail-row"><span>davon Fehlwurfgeld</span><strong>${euro0(p.kasseFwA2)}</strong></div>
+          <div class="detail-row"><span>davon unter 500</span><strong>${euro0(p.kasseU500A2)}</strong></div>
+          <div class="detail-row"><span>davon Punkt verloren</span><strong>${euro0(p.kassePunktA2)}</strong></div>
           <div class="detail-row"><span>>580 / >590 / >600</span><strong>${p.gt580} / ${p.gt590} / ${p.gt600}</strong></div>
           <div class="detail-row"><span>Sätze <120</span><strong>${p.setLt} / ${p.setTotal}</strong></div>
           <div class="detail-row"><span>Sätze >150</span><strong>${p.setGt} / ${p.setTotal}</strong></div>
@@ -4977,14 +6426,14 @@ function openPlayerProfile(name){
       </div>
 
       <div class="profile-box bestworst-box">
-        <h4>Beste / schlechteste Leistung</h4>
+        <h4>Bestwert / Tiefstwert</h4>
         <div class="bestworst-item">
-          <div class="bestworst-head"><span>Bestleistung</span><strong>${int(p.best)}</strong></div>
+          <div class="bestworst-head"><span>Bestwert</span><strong>${int(p.best)}</strong></div>
           <div class="bestworst-game">${fullFixture(bestGame)}</div>
           <div class="bestworst-date">${deDate(bestGame.Datum)} · ${bestGame["Heim/Auswärts"]||""}</div>
         </div>
         <div class="bestworst-item worst">
-          <div class="bestworst-head"><span>Flop</span><strong>${int(p.worst)}</strong></div>
+          <div class="bestworst-head"><span>Tiefstwert</span><strong>${int(p.worst)}</strong></div>
           <div class="bestworst-game">${fullFixture(worstGame)}</div>
           <div class="bestworst-date">${deDate(worstGame.Datum)} · ${worstGame["Heim/Auswärts"]||""}</div>
         </div>
@@ -5286,7 +6735,7 @@ function renderPlayerSeasonCompare(){
       ${compareRow("Heim Ø",pa?.home??null,pb?.home??null)}
       ${compareRow("Auswärts Ø",pa?.away??null,pb?.away??null)}
       ${compareTextRow("Bilanz",pa?.duels??"–",pb?.duels??"–","S-U-N")}
-      ${compareRow("Bestleistung",pa?.best??null,pb?.best??null,{digits:0})}
+      ${compareRow("Top",pa?.best??null,pb?.best??null,{digits:0})}
       ${compareRow("Abräumer ≥200",pa?.abr200??null,pb?.abr200??null,{digits:0})}
     </div>`;
 }
@@ -5407,31 +6856,19 @@ renderAll();
 (() => {
   let deferredInstallPrompt = null;
   const installBtn = document.getElementById("installAppBtn");
-
   if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-      navigator.serviceWorker.register("./sw.js").catch(() => {});
-    });
+    window.addEventListener("load", () => { navigator.serviceWorker.register("./sw.js").catch(() => {}); });
   }
-
   window.addEventListener("beforeinstallprompt", e => {
-    e.preventDefault();
-    deferredInstallPrompt = e;
-    if (installBtn) installBtn.hidden = false;
+    e.preventDefault(); deferredInstallPrompt = e; if (installBtn) installBtn.hidden = false;
   });
-
   installBtn?.addEventListener("click", async () => {
     if (!deferredInstallPrompt) return;
     deferredInstallPrompt.prompt();
     try { await deferredInstallPrompt.userChoice; } catch(e) {}
-    deferredInstallPrompt = null;
-    installBtn.hidden = true;
+    deferredInstallPrompt = null; installBtn.hidden = true;
   });
-
-  window.addEventListener("appinstalled", () => {
-    deferredInstallPrompt = null;
-    if (installBtn) installBtn.hidden = true;
-  });
+  window.addEventListener("appinstalled", () => { deferredInstallPrompt = null; if (installBtn) installBtn.hidden = true; });
 })();
 </script>
 
