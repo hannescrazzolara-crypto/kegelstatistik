@@ -15,6 +15,7 @@ concurrency:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
 
@@ -22,9 +23,23 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          curl -L --fail --retry 3 --retry-delay 2 --silent --show-error \
+          if ! curl -L --fail --max-time 60 --silent --show-error \
             "https://1drv.ms/u/c/60d316054116e832/IQAUBxIFXaeYSKDP9KsRAWX6AUx6XTeHzldGSBHITuM6_Mc?download=1" \
-            -o /tmp/Kegelstatistik_Daten.json
+            -o /tmp/Kegelstatistik_Daten.json; then
+            python -m pip install --quiet playwright==1.55.0
+            python -m playwright install chromium --with-deps
+            python - <<'PYDOWNLOAD'
+          from playwright.sync_api import sync_playwright
+          with sync_playwright() as p:
+              browser = p.chromium.launch()
+              page = browser.new_page(accept_downloads=True)
+              page.goto('https://1drv.ms/u/c/60d316054116e832/IQAUBxIFXaeYSKDP9KsRAWX6AUx6XTeHzldGSBHITuM6_Mc', wait_until='domcontentloaded', timeout=90000)
+              with page.expect_download(timeout=90000) as download:
+                  page.get_by_role('menuitem', name='Download this file to your device', exact=True).click(timeout=90000)
+              download.value.save_as('/tmp/Kegelstatistik_Daten.json')
+              browser.close()
+          PYDOWNLOAD
+          fi
 
           python - <<'PY2'
           import json
