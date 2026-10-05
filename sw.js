@@ -1,4 +1,4 @@
-const CACHE_NAME = "kegelstatistik-pwa-2026-10-05-v43-live";
+const CACHE_NAME = "kegelstatistik-pwa-2026-10-05-v45-games-tile";
 const CORE = [
   "./",
   "./index.html",

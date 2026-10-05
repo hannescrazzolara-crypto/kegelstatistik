@@ -5234,6 +5234,7 @@ html[data-theme="dark"] #mobilePlayerStats .mps3-games strong{
 
 
 
+/* ===== V45: Anzahl Spiele als große KPI-Kachel ===== */
 /* ===== V41: maximale nutzbare Handybreite + saubere Best/Tiefst-Köpfe ===== */
 @media(max-width:760px){
   /* Spielerbereich fast bis an den Displayrand ziehen. */
@@ -5729,7 +5730,8 @@ function updateHeroSubtitle(){
   };
   const base=labels[activeTab]||"Mannschaftsübersicht";
   const player=$("#player").value;
-  $("#heroSubtitle").textContent=player?`${base} · Spielerfokus: ${player}`:base;
+  const subtitle=base;
+  $("#heroSubtitle").textContent=player?`${subtitle} · Spielerfokus: ${player}`:subtitle;
 }
 function renderHero(rows){
   const s=teamStats(rows),season=$("#season").value||"Alle Saisonen",comp=$("#competition").value||"Alle Wettbewerbe";
@@ -5746,6 +5748,7 @@ function renderKPIs(rows){
       cls:"leistung",
       items:[
         ["Mannschaft Ø",fmt(s.teamAvg),"Kegel pro Spieler","brand"],
+        ["Anzahl Spiele",String(s.games||0),"gefilterte Auswahl","brand"],
         ["Mannschaftskegel Ø",fmt(s.pinsAvg,0),"pro Spiel",""],
         ["Heim Ø",fmt(s.homeAvg),"Mannschaft Ø",""],
         ["Auswärts Ø",fmt(s.awayAvg),"Mannschaft Ø",""],
