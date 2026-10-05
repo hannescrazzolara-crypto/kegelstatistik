@@ -5488,7 +5488,8 @@ html[data-theme="dark"] #mobilePlayerStats .mps3-games strong{
 let DATA=JSON.parse(document.getElementById('appData').textContent);
 let DATA_MODE="Offline-Snapshot";
 try{
-  const res=await fetch(`./Kegelstatistik_Daten.json?v=${Date.now()}`,{cache:"no-store"});
+  const dataUrl = location.hostname === "hannescrazzolara-crypto.github.io" ? "https://raw.githubusercontent.com/hannescrazzolara-crypto/kegelstatistik/main/Kegelstatistik_Daten.json" : "./Kegelstatistik_Daten.json";
+  const res=await fetch(`${dataUrl}?v=${Date.now()}`,{cache:"no-store"});
   if(!res.ok) throw new Error(`HTTP ${res.status}`);
   const live=await res.json();
   if(!live || !Array.isArray(live.records) || live.records.length<100 || !live.colors || typeof live.colors!=="object"){
