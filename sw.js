@@ -1,4 +1,4 @@
-const CACHE_NAME = "kegelstatistik-pwa-2026-10-03-v1";
+const CACHE_NAME = "kegelstatistik-pwa-2026-10-05-v43-live";
 const CORE = [
   "./",
   "./index.html",
@@ -9,48 +9,35 @@ const CORE = [
 ];
 
 self.addEventListener("install", event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(CORE))
-      .then(() => self.skipWaiting())
-  );
+  event.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()));
 });
 
 self.addEventListener("activate", event => {
-  event.waitUntil(
-    caches.keys()
-      .then(keys => Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))))
-      .then(() => self.clients.claim())
-  );
+  event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));
 });
 
 self.addEventListener("fetch", event => {
-  const req = event.request;
-  if (req.method !== "GET") return;
+  const req=event.request;
+  if(req.method!=="GET") return;
+  const url=new URL(req.url);
 
-  if (req.mode === "navigate") {
+  if(url.pathname.endsWith("/Kegelstatistik_Daten.json")){
     event.respondWith(
-      fetch(req)
-        .then(res => {
-          const copy = res.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put("./index.html", copy));
-          return res;
-        })
-        .catch(() => caches.match("./index.html").then(r => r || caches.match("./")))
+      fetch(req).then(res=>{
+        if(res && res.ok){const copy=res.clone();caches.open(CACHE_NAME).then(c=>c.put("./Kegelstatistik_Daten.json",copy));}
+        return res;
+      }).catch(()=>caches.match("./Kegelstatistik_Daten.json"))
     );
     return;
   }
 
-  event.respondWith(
-    caches.match(req).then(cached => {
-      const network = fetch(req).then(res => {
-        if (res && res.ok) {
-          const copy = res.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(req, copy));
-        }
-        return res;
-      }).catch(() => cached);
-      return cached || network;
-    })
-  );
+  if(req.mode==="navigate"){
+    event.respondWith(fetch(req).then(res=>{const copy=res.clone();caches.open(CACHE_NAME).then(c=>c.put("./index.html",copy));return res;}).catch(()=>caches.match("./index.html").then(r=>r||caches.match("./"))));
+    return;
+  }
+
+  event.respondWith(caches.match(req).then(cached=>{
+    const network=fetch(req).then(res=>{if(res&&res.ok){const copy=res.clone();caches.open(CACHE_NAME).then(c=>c.put(req,copy));}return res;}).catch(()=>cached);
+    return cached||network;
+  }));
 });
