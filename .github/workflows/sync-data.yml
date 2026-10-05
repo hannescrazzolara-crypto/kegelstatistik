@@ -1,0 +1,58 @@
+name: Sync Kegelstatistik data
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kegelstatistik-data-sync
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download and validate OneDrive master
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 3 --retry-delay 2 --silent --show-error \
+            "https://1drv.ms/u/c/60d316054116e832/IQAUBxIFXaeYSKDP9KsRAWX6AUx6XTeHzldGSBHITuM6_Mc?download=1" \
+            -o /tmp/Kegelstatistik_Daten.json
+
+          python - <<'PY2'
+          import json
+          from pathlib import Path
+          p=Path('/tmp/Kegelstatistik_Daten.json')
+          data=json.loads(p.read_text(encoding='utf-8-sig'))
+          records=data.get('records')
+          colors=data.get('colors')
+          if not isinstance(records,list) or len(records)<100:
+              raise SystemExit('Validierung fehlgeschlagen: records')
+          if not isinstance(colors,dict) or not colors:
+              raise SystemExit('Validierung fehlgeschlagen: colors')
+          Path('Kegelstatistik_Daten.json').write_text(
+              json.dumps(data,ensure_ascii=False,separators=(',',':')),encoding='utf-8'
+          )
+          print(f'OK: {len(records)} Datensätze')
+          PY2
+
+      - name: Commit only when data changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- Kegelstatistik_Daten.json; then
+            echo "Keine Datenänderung."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Kegelstatistik_Daten.json
+          git commit -m "Sync Kegelstatistik data"
+          git push
